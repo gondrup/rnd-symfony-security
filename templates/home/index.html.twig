@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Welcome{% endblock %}
 
 {% block body %}
 <style>
@@ -11,10 +11,17 @@
 <div class="example-wrapper">
     <h1>R&D Symfony Security Testing ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Login to an existing account: <a href="{{ path('app_login') }}">Login</a></li>
-        <li>Register a new account: <a href="{{ path('app_register') }}">Register</a></li>
-    </ul>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        You are logged in.
+        <ul>
+            <li>Log out: <a href="{{ path('app_logout') }}">Logout</a></li>
+        </ul>
+    {% else %}
+        You are not logged in.
+        <ul>
+            <li>Login to an existing account: <a href="{{ path('app_login') }}">Login</a></li>
+            <li>Register a new account: <a href="{{ path('app_register') }}">Register</a></li>
+        </ul>
+    {% endif %}
 </div>
 {% endblock %}
